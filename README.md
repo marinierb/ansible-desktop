@@ -1,6 +1,6 @@
 # Ansible Manjaro Setup
 
-![GitHub last commit](https://img.shields.io/github/last-commit/marinierb/ansible-manjaro-desktop)
+![GitHub last commit](https://img.shields.io/github/last-commit/marinierb/ansible-desktop)
 
 ## Custom configure my personal Manjaro desktop
 
