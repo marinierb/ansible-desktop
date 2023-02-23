@@ -1,0 +1,5 @@
+---
+- name: run generic archive recover task
+  include_role:
+    name:       archive
+    tasks_from: restore

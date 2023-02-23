@@ -1,0 +1,9 @@
+---
+# backups
+configDir: "{{userDir}}/.config/google-chrome/Default"
+format:    zip
+backup:    "{{mainBackupDir}}/chrome.{{format}}{{skip_restore|default()}}"
+restore:   "{{mainBackupDir}}/chrome.{{format}}"
+archiveItems:
+- "{{configDir}}"
+archiveSkipItems:

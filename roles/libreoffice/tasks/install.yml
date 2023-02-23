@@ -1,0 +1,9 @@
+---
+- name: install with dependencies
+  ansible.builtin.package:
+    name: "{{item}}"
+    state: present
+  with_items:
+  - libreoffice-still
+  - jre-openjdk-headless
+  become: true

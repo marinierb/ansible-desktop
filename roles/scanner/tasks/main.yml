@@ -1,0 +1,29 @@
+---
+- name: install packages
+  ansible.builtin.package:
+    name:  simple-scan
+    state: present
+  become: true
+
+- name: install aur packages
+  aur:
+    name:  brscan4
+    state: present
+
+- name: check for scanner
+  ansible.builtin.command: sh -c "/usr/bin/brsaneconfig4 -q | grep {{scanName}}"
+  ignore_errors: true
+  register: scanner_presence
+  changed_when: false
+
+- name: add scanner
+  ansible.builtin.command: /usr/bin/brsaneconfig4 -a name="{{scanName}}" model="{{scanModel}}" ip="{{mfpIP}}"
+  become: true
+  when: scanner_presence.rc == 1
+
+- name: add user to group
+  ansible.builtin.user:
+    name:   "{{user}}"
+    groups: "{{scanGroup}}"
+    append: yes
+  become: true

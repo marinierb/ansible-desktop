@@ -1,0 +1,20 @@
+#/usr/bin/env bash
+#################################################################################
+_backup_completions()
+{
+  if [ "${#COMP_WORDS[@]}" != "2" ]; then
+    return
+  fi
+  COMPREPLY=($(compgen -W "$(grep -v '^ *#' playbook-backup.yml | grep tags: | awk '{ print $6 }')" -- "${COMP_WORDS[1]}"))
+}
+complete -F _backup_completions an-backup
+#################################################################################
+_nuc_completions()
+{
+  if [ "${#COMP_WORDS[@]}" != "2" ]; then
+    return
+  fi
+  COMPREPLY=($(compgen -W "$(grep -v '^ *#' playbook-nuc.yml | grep tags: | awk '{ print $6 }')" -- "${COMP_WORDS[1]}"))
+}
+complete -F _nuc_completions an-nuc
+###############################################################################

@@ -1,0 +1,23 @@
+---
+- hosts: nuc
+  vars:
+  - doinstall: true
+  - dorestore: true
+  - dobackup:  false
+  roles:
+  - { role: test,         tags: test }
+  - { role: packages,     tags: packages }
+  - { role: bashrc,       tags: bashrc }
+  - { role: chrome,       tags: chrome }
+  - { role: cloudlinks,   tags: cloudlinks }
+  - { role: defaultshell, tags: defaultshell }
+  - { role: gnome,        tags: gnome }
+  - { role: libreoffice,  tags: libreoffice }
+  - { role: printer,      tags: printer }
+  - { role: scanner,      tags: scanner }
+  - { role: userdirs,     tags: userdirs }
+  - { role: virtualbox,   tags: virtualbox }
+  - { role: vscode,       tags: vscode }
+  - { role: nfs,          tags: nfs }
+  - { role: mediashares,  tags: mediashares }
+  - { role: othershare,   tags: othershare }

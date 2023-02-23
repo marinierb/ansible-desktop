@@ -1,0 +1,15 @@
+---
+- name: install
+  ansible.builtin.package:
+    name: "{{ 'nfs-utils' if ansible_os_family == 'Archlinux' else 'nfs-kernel-server' }}"
+
+    state: present
+  become: true
+
+- name: configure service
+  ansible.builtin.systemd:
+    name:    nfs-server
+    state:   started
+    enabled: yes
+  become: true
+

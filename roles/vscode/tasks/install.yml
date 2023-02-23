@@ -1,0 +1,6 @@
+---
+- name: install package
+  ansible.builtin.package:
+    name:  code
+    state: present
+  become: true

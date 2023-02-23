@@ -1,0 +1,6 @@
+---
+# make sure these vars are defined
+packages_add:
+packages_add_aur:
+packages_remove:
+packages_remove_aur:

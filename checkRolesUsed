@@ -1,0 +1,20 @@
+#!/bin/bash
+case "$1" in
+  "")   roles=`ls roles`;;
+  "-u") roles=`ls roles` ; unused=1;;
+   *)   roles=$1;;
+esac
+for role in $roles
+do
+  grep "$role," playbook*.yml >/dev/null 2>&1
+  if [ $? = 0 ]
+  then
+    if [ ! "$unused" ]
+    then
+      echo -e "\n$role used in:"
+      grep "$role," playbook*.yml | sed 's/^/   /'
+    fi
+  else
+    echo -e "\n====> $role not used!"
+  fi
+done

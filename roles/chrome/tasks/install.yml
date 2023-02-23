@@ -1,0 +1,10 @@
+---
+- name: install
+  aur:
+    name:  google-chrome
+    state: present
+
+- name: create config file
+  ansible.builtin.copy:
+    src:  chrome-flags.conf
+    dest: "{{userDir}}/.config"

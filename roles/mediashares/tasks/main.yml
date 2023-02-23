@@ -1,0 +1,16 @@
+---
+- name: create directories
+  ansible.builtin.file:
+    path:  "{{ item }}"
+    state: directory
+  with_items: "{{ mediaShares }}"
+
+- name: configure exports
+  ansible.builtin.template:
+    src:   mediashares.exports
+    dest:  /etc/exports.d/
+    owner: root
+    group: root
+    mode:  0644
+  become: true
+  notify: restart nfs
