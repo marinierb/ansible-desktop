@@ -5,7 +5,6 @@
   - dorestore: true
   - dobackup:  false
   roles:
-  - { role: test,         tags: test }
   - { role: packages,     tags: packages }
   - { role: bashrc,       tags: bashrc }
   - { role: chrome,       tags: chrome }
