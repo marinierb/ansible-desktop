@@ -1,0 +1,12 @@
+---
+# backups
+configDir: "{{userDir}}/.config/Code - OSS/"
+extList:   "{{userDir}}/.config/Code - OSS/extensions.yml"
+format:    zip
+backup:    "{{mainBackupDir}}/vscode.{{format}}"
+restore:   "{{mainBackupDir}}/vscode.{{format}}"
+archiveItems:
+- "{{configDir}}/User"
+- "{{extList}}"
+archiveSkipItems:
+- "*Storage"

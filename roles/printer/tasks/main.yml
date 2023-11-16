@@ -1,0 +1,35 @@
+---
+- name: install packages
+  ansible.builtin.package:
+    name: "{{item}}"
+    state: present
+  with_items:
+  - manjaro-printer
+  - system-config-printer
+  become: true
+
+- name: install aur packages
+  aur:
+    name:  brlaser
+    state: present
+
+- name: enable and start service
+  ansible.builtin.systemd:
+    name:  "cups.service"
+    state: started
+    enabled: yes
+  become: true
+
+- name: check for printer
+  ansible.builtin.command: lpstat -p {{mfpName}}
+  ignore_errors: true
+  register: printer_presence
+  changed_when: false
+
+- block:
+  - name: add printer
+    ansible.builtin.command: /usr/bin/lpadmin -p {{mfpName}} -E  -v {{printURI}} -m {{printDriver}}
+  - name: set print options
+    ansible.builtin.command: /usr/bin/lpoptions -p "{{mfpName}}" -o "{{item}}"
+    with_items: "{{printOptions}}"
+  when: printer_presence.rc == 1

@@ -1,0 +1,13 @@
+---
+# - name: install prerequisites
+#   ansible.builtin.package:
+#     name: "{{item}}"
+#     state: present
+#   when: item
+#   with_items: libcurl-gnutls
+#   become: true
+
+- name: build aur package
+  aur:
+    name:  spotify
+    state: present

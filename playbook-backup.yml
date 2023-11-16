@@ -1,0 +1,12 @@
+---
+- hosts: nuc
+  vars:
+    doinstall: false
+    dorestore: false
+    dobackup:  true
+  roles:
+  - { role: gnome,       tags: gnome }
+  - { role: chrome,      tags: chrome }
+  - { role: libreoffice, tags: libreoffice }
+  - { role: vscode,      tags: vscode }
+  - { role: virtualbox,  tags: virtualbox }

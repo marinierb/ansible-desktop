@@ -1,0 +1,14 @@
+---
+- name: enable aur
+  ansible.builtin.lineinfile:
+    path:   "/etc/pamac.conf"
+    regexp: '^#EnableAUR'
+    line:   'EnableAUR'
+  become: true
+
+- name: enable aur updates
+  ansible.builtin.lineinfile:
+    path:   "/etc/pamac.conf"
+    regexp: '^#CheckAURUpdates'
+    line:   'CheckAURUpdates'
+  become: true

@@ -1,0 +1,23 @@
+---
+- name: install packages
+  ansible.builtin.package:
+    name: "{{item}}"
+    state: present
+  with_items:
+  - docker
+  - docker-compose
+  become: true
+
+- name: configure service
+  ansible.builtin.systemd:
+    name:    docker
+    state:   started
+    enabled: yes
+  become: true
+
+- name: add user to group
+  ansible.builtin.user:
+    name:   "{{user}}"
+    groups: docker
+    append: yes
+  become: true

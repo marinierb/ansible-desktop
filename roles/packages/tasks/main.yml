@@ -1,0 +1,34 @@
+---
+- name: install packages
+  ansible.builtin.package:
+    name: "{{item}}"
+    state: present
+  when: item
+  with_items: "{{ packages_add }}"
+  become: true
+
+- name: install aur packages
+  aur:
+    name: "{{item}}"
+    state: present
+  when: item
+  with_items:
+  - "{{ packages_add_aur }}"
+
+- name: remove packages
+  ansible.builtin.package:
+    name: "{{item}}"
+    state: absent
+  when: item
+  with_items:
+  - "{{ packages_remove }}"
+  become: true
+
+- name: remove aur packages
+  aur:
+    name: "{{item}}"
+    state: present
+  when: item
+  with_items:
+  - "{{ packages_remove_aur }}"
+

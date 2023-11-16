@@ -1,0 +1,5 @@
+---
+- name: run generic archive create task
+  include_role:
+    name:       archive
+    tasks_from: create

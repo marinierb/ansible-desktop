@@ -1,0 +1,15 @@
+---
+- name: look for file
+  ansible.builtin.stat:
+    path: "{{tempDir}}/{{item.file}}"
+  register: st  
+
+- block:
+  - name: load the file
+    ansible.builtin.shell:
+      cmd: "dconf load {{item.path}} < {{tempDir}}/{{item.file}}"
+#  - name: restore gnome-shell.css
+#    ansible.builtin.copy:
+#      src:  "{{tempDir}}/gnome-shell.css"
+#      dest: "{{gnomeShellCss}}"
+  when: st.stat.exists

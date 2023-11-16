@@ -1,0 +1,18 @@
+#!/bin/bash
+stat(){
+  [ "$(ls -A {{mediaOtherShare}})" ] && echo "On" || echo "Off"
+}
+case "$1" in
+  "off")    getpass sudo | sudo -S /usr/bin/encfs -u {{mediaOtherShare}} 2>/dev/null
+            stat
+            ;;
+  "on")     getpass sudo | sudo /usr/bin/encfs -S --public {{mediaOtherDir}} {{mediaOtherShare}} #2>/dev/null
+            getpass sudo | sudo -S /usr/bin/sh -c "exportfs -ar" 2>/dev/null
+            stat
+            ;;
+  "stat")   stat
+            ;;
+  "passwd") getpass sudo | sudo -S encfsctl passwd $HOME/.other
+            ;;
+  *)        echo "usage: other off|on|stat|passwd"
+esac

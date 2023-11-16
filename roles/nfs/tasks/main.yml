@@ -1,0 +1,13 @@
+---
+- name: install
+  ansible.builtin.package:
+    name:  nfs-utils  
+    state: present
+  become: true
+
+- name: configure service
+  ansible.builtin.systemd:
+    name:    nfs-server
+    state:   stopped
+    enabled: no
+  become: true

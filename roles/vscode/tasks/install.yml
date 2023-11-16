@@ -1,0 +1,11 @@
+---
+- name: install package
+  ansible.builtin.package:
+    name:  code
+    state: present
+  become: true
+
+- name: create local launcher file (specifies the workspace)
+  ansible.builtin.template:
+    src: code-oss.desktop
+    dest: "{{localLauncherDir}}"

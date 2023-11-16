@@ -1,0 +1,21 @@
+---
+- name: get extension list
+  ansible.builtin.shell:
+    cmd: "echo \"# List of extensions for vscode\nextensions:\" ; code --list-extensions | sed -e 's/^/- \"/' -e 's/$/\"/'"
+  register: out
+  changed_when: false
+
+- name: create formatted extension list
+  ansible.builtin.copy:
+    content: "{{out.stdout}}"
+    dest:    "{{extList}}"
+
+- name: run generic archive create task
+  include_role:
+    name:       archive
+    tasks_from: create
+
+- name: remove extention list
+  ansible.builtin.file:
+    path: "{{extList}}"
+    state: absent

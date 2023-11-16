@@ -1,0 +1,12 @@
+---
+- name: remove previous archives
+  ansible.builtin.shell:
+    cmd: "rm -f {{backup}}*"
+
+- name: create the archive "{{backup}}{{skipRestore|default()}}"
+  ansible.builtin.archive:
+    path:               "{{archiveItems}}"
+    exclusion_patterns: "{{archiveSkipItems}}"
+    dest:               "{{backup}}{{skipRestore|default()}}"
+    format:             "{{format}}"
+

@@ -1,0 +1,18 @@
+---
+- name: look for archive
+  ansible.builtin.stat:
+    path: "{{restore}}"
+  register: arc
+
+- name: recover archive if found
+  block:
+  - name: ensure config dir exists
+    file:
+      path: "{{configDir}}"
+      state: directory
+
+  - name: recover config "{{restore}}"
+    ansible.builtin.unarchive:
+      src:  "{{restore}}"
+      dest: "{{configDir}}/"
+  when: arc.stat.exists

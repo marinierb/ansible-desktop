@@ -1,0 +1,29 @@
+#/usr/bin/env bash
+#################################################################################
+_backup-vms_completions()
+{
+  if [ "${#COMP_WORDS[@]}" != "2" ]; then
+    return
+  fi
+  COMPREPLY=($(compgen -W "$(grep -v '^ *#' playbook-backup-vms.yml | grep tags: | awk '{ print $6 }')" -- "${COMP_WORDS[1]}"))
+}
+complete -F _backup-vms_completions an-backup-vms
+#################################################################################
+_backup_completions()
+{
+  if [ "${#COMP_WORDS[@]}" != "2" ]; then
+    return
+  fi
+  COMPREPLY=($(compgen -W "$(grep -v '^ *#' playbook-backup.yml | grep tags: | awk '{ print $6 }')" -- "${COMP_WORDS[1]}"))
+}
+complete -F _backup_completions an-backup
+#################################################################################
+_desktop_completions()
+{
+  if [ "${#COMP_WORDS[@]}" != "2" ]; then
+    return
+  fi
+  COMPREPLY=($(compgen -W "$(grep -v '^ *#' playbook-desktop.yml | grep tags: | awk '{ print $6 }')" -- "${COMP_WORDS[1]}"))
+}
+complete -F _desktop_completions an-desktop
+###############################################################################

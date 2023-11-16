@@ -1,0 +1,22 @@
+---
+- name: disable swap file
+  ansible.builtin.command: |
+    swapoff {{swapfilePath}}
+  become: true
+
+- name: remove swap file
+  ansible.builtin.file:
+    path:  "{{swapfilePath}}"
+    state: "absent"
+  become: true
+
+- name: remove swap file from /etc/fstab
+  ansible.builtin.mount:
+    src:    "{{swapfilePath}}"
+    name:   "none"
+    fstype: "swap"
+    opts:   "sw,nofail"
+    dump:   "0"
+    passno: "0"
+    state:  absent
+  become: true

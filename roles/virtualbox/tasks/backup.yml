@@ -1,0 +1,26 @@
+---
+
+- name: check if {{vboxDir}} exists
+  ansible.builtin.stat:
+    path: "{{vboxDir}}"
+  register: dir
+  failed_when: not dir.stat.exists
+
+- ansible.builtin.pause:
+    prompt: "Do you want to back up VirtualBox VMs (yes)?"
+  register: my_pause
+  delegate_to: localhost
+
+####################################
+- block:
+
+  - name: back up VirtualBox VMs
+    ansible.builtin.command:
+      cmd: rsync -av --delete {{vboxDir}} {{server}}:{{serverBackupDir}}/
+    register: output
+
+  - name: show output
+    debug: msg="{{output.stdout_lines}}"
+
+  when: my_pause.user_input | bool
+####################################

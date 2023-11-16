@@ -1,0 +1,117 @@
+---
+ansible_host: nuc
+ansible_connection: local
+ansible_sudo_pass:  "{{brunoSudoPass}}"
+
+ansible_python_interpreter: "/usr/bin/python3"
+
+# for role swap
+swapEnable:   true
+swapfileSize: 3072
+swapfilePath: /swapfile
+swappiness:   10
+
+# global stuff
+user:             bruno
+userDir:          "/home/{{user}}"
+cloudDir:         "{{userDir}}/Dropbox"
+cloudLinuxDir:    "{{cloudDir}}/Linux"
+cloudBackupsDir:  "{{cloudDir}}/Backups"
+localLauncherDir: "{{userDir}}/.local/share/applications"
+
+# for virtualbox backup
+vboxDir:          "{{userDir}}/VirtualBoxVMs"
+server:           server
+serverBackupDir:  /home/bruno/other
+
+# for role cloudlinks
+cloudLinks:
+- { src: "{{cloudLinuxDir}}/Desktop",              dest: "{{userDir}}/Desktop" }
+- { src: "{{cloudLinuxDir}}/Scripts",              dest: "{{userDir}}/Scripts" }
+- { src: "{{cloudLinuxDir}}/Scripts/local",        dest: "{{userDir}}/.local/bin" }
+- { src: "{{cloudLinuxDir}}/Launchers",            dest: "{{localLauncherDir}}" }
+- { src: "{{cloudLinuxDir}}/NautilusScripts",      dest: "{{userDir}}/.local/share/nautilus/scripts" }
+- { src: "{{cloudLinuxDir}}/GnomeShellExtensions", dest: "{{userDir}}/.local/share/gnome-shell/extensions" }
+- { src: "{{cloudLinuxDir}}/argos",                dest: "{{userDir}}/.config/argos" }
+- { src: "{{cloudLinuxDir}}/ssh",                  dest: "{{userDir}}/.ssh" }
+
+# for backup/restore tasks
+mainBackupDir:     "{{cloudDir}}/ansible/desktop/backups"
+skipRestore:       ".skiprestore"
+
+# for role packages
+packages_add:
+- gnome-shell-extension-custom-accent-colors
+- gnome-browser-connector
+- gnome-weather
+- baobab #disk usage
+- yad
+- keepassxc
+- yt-dlp
+- vlc
+- perl-image-exiftool
+# - python-netaddr
+# - python-proxmoxer
+- util-linux
+- ventoy
+- android-tools
+- dnsutils
+- mariadb-clients
+# - automake
+# - pkg-config
+# - make
+# - lsof
+- dconf-editor
+packages_add_aur:
+- nautilus-dropbox
+#- spotify
+#- stacer
+packages_remove:
+- manjaro-hello
+- gnome-weather
+- gnome-tour
+- gnome-calendar
+- totem
+- gnome-shell-extensions
+
+# for roles printer and scanner
+mfpName:     "DCP-7065DN"
+mfpIP:       192.168.0.105
+printURI:    "lpd://{{mfpIP}}/BINARY_P1"
+printDriver:  "drv:///brlaser.drv/br7065dn.ppd"
+printOptions:
+- "PageSize=Letter"
+- "Duplex=DuplexNoTumble"
+- "Sides=two-sided-long-edge"
+scanName:  "Scanner"
+scanModel: "DCP-7065DN"
+scanGroup: "scanner"
+
+# for role mediashares
+# mediaClients:
+# - "{{phone}}"
+# - "{{eboxHaut}}"
+# - "{{eboxBas}}"
+# - "{{laptop}}"
+# mediaShares:
+# - "{{userDir}}/Music"
+# - "{{userDir}}/Pictures"
+
+# for role othershare
+# mediaOtherDir:   "{{userDir}}/.other"
+# mediaOtherShare: "{{userDir}}/.otherMounted"
+
+# smbGroup:      sambashare
+# smbWorkgroup:  maison
+# smbHostsallow: "127. 192.168.0."
+
+# smbShareList:
+# - { name:       Downloads,
+#     path:       "{{userDir}}/Downloads",
+#     writable:   "yes",
+#     createmode: "0770",
+#     dirmode:    "0770",
+#     sharemodes: "yes",
+#     guestok:    "yes",
+#     user:   "{{user}}"
+#   }

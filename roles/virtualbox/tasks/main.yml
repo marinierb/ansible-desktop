@@ -1,0 +1,9 @@
+---
+- include_tasks: install.yml
+  when: doinstall|bool is true
+
+- include_tasks: backup.yml
+  when: dobackup|bool is true
+
+# - include_tasks: restore.yml
+#   when: dorestore|bool is true

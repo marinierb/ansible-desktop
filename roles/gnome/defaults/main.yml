@@ -1,0 +1,28 @@
+---
+# backups
+tempDir: "/tmp/gnome-backup"
+files:
+- { path: "/org/gnome/settings-daemon/plugins/power/", file: "plugins-power" }
+- { path: "/org/gnome/desktop/input-sources/",         file: "desktop-input-sources" }
+- { path: "/org/gnome/desktop/interface/",             file: "desktop-interface" }
+- { path: "/org/gnome/desktop/peripherals/keyboard/",  file: "desktop-keyboard" }
+- { path: "/org/gnome/desktop/privacy/",               file: "desktop-privacy" }
+- { path: "/org/gnome/desktop/session/",               file: "desktop-session" }
+- { path: "/org/gnome/desktop/wm/keybindings/",        file: "desktop-wm-keybindings" }
+- { path: "/org/gnome/nautilus/",                      file: "nautilus" }
+- { path: "/org/gnome/terminal/legacy/",               file: "terminal-legacy" }
+- { path: "/org/gnome/mutter/",                        file: "mutter" }
+- { path: "/org/gnome/shell/extensions/",              file: "shell-extensions" }
+- { path: "/org/gnome/desktop/screensaver/",           file: "desktop-screensaver" }
+- { path: "/org/gnome/desktop/background/",            file: "desktop-background" }
+#- { path: "/org/gnome/deja-dup/",                      file: "terminal-deja-dup" }
+
+#gnomeShellCss: "{{userDir}}/.config/gnome-shell/gnome-shell.css"
+
+configDir: "{{tempDir}}"
+format:    zip
+backup:    "{{mainBackupDir}}/gnome.{{format}}"
+restore:   "{{mainBackupDir}}/gnome.{{format}}"
+archiveItems:
+- "{{tempDir}}/*"
+archiveSkipItems:

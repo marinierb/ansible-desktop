@@ -1,0 +1,6 @@
+---
+- name: restart nfs
+  ansible.builtin.command: 
+    cmd: exportfs -arv
+  become: true
+  changed_when: false

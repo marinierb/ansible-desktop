@@ -1,0 +1,35 @@
+---
+- name: create swap file
+  ansible.builtin.shell: |
+    dd if=/dev/zero of={{swapfilePath}} bs=1M count={{swapfileSize}}
+  become: true
+
+- name: set swap file permissions
+  ansible.builtin.file:
+    path:  "{{swapfilePath}}"
+    state: "file"
+    owner: "root"
+    group: "root"
+    mode:  "0600"
+  become: true
+
+- name: initialize swap file
+  ansible.builtin.command: |
+    mkswap {{swapfilePath}}
+  become: true
+
+- name: enable swap file
+  ansible.builtin.command: |
+    swapon {{swapfilePath}}
+  become: true
+
+- name: add swap file to /etc/fstab
+  ansible.builtin.mount:
+    src:    "{{swapfilePath}}"
+    name:   "none"
+    fstype: "swap"
+    opts:   "sw,nofail"
+    dump:   "0"
+    passno: "0"
+    state:  present
+  become: true

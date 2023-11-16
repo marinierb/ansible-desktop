@@ -1,0 +1,7 @@
+{% if mediaShares != None %}
+{% for share  in mediaShares %}
+{% for client in mediaClients %}
+{{share}} {{client}}{{mediaOpts}}
+{% endfor %}
+{% endfor %}
+{% endif %}

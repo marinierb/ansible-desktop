@@ -1,0 +1,15 @@
+---
+- name: set user dirs
+  include_tasks: set.yml
+  with_items:
+  - { name: "DOCUMENTS", dir: "$HOME/Dropbox/Documents" }
+
+# NAME should be one of the following:
+#     DESKTOP
+#     DOWNLOAD
+#     TEMPLATES
+#     PUBLICSHARE
+#     DOCUMENTS
+#     MUSIC
+#     PICTURES
+#     VIDEOS

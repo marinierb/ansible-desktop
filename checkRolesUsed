@@ -1,0 +1,23 @@
+#!/bin/bash
+case "$1" in
+  "")   roles=`ls roles`;;
+  "-u") roles=`ls roles` ; unused=1;;
+   *)   roles=$1;;
+esac
+for role in $roles
+do
+  used=
+  for playbook in playbook*.yml
+  do
+    grep "$role," $playbook >/dev/null 2>&1
+    if [ $? = 0 ]
+    then
+#      echo -e "\n$role -> $playbook ->\c"
+      line=`grep "$role," $playbook | sed 's/^ *//'`
+      printf "%-20s %-25s %-s\n" $role $playbook "$line"
+      used=1
+    fi
+  done
+  [[ ! "$used" ]] && unused="$unused\n====> $role not used!"
+done
+echo -e "$unused"

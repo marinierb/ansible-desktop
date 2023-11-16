@@ -1,0 +1,17 @@
+---
+- name: set dir perms
+  ansible.builtin.file:
+    path:  "{{cloudLinuxDir}}/ssh"
+    mode: '0700'
+
+- name: set private key perms
+  ansible.builtin.file:
+    path:  "{{cloudLinuxDir}}/ssh/id_rsa"
+    mode: '0700'
+
+- name: configure service
+  ansible.builtin.systemd:
+    name:    sshd
+    state:   started
+    enabled: yes
+  become: true

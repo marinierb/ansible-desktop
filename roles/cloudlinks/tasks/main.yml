@@ -1,0 +1,7 @@
+---
+- name: create
+  include_tasks: link.yml
+  loop_control:
+    label: "{{ item.dest }}"
+  loop:
+    "{{cloudLinks}}"

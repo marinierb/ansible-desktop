@@ -1,0 +1,33 @@
+#!/bin/bash
+# Process command line args
+playbook=playbook-`basename $0 | cut -d'-' -f2-`.yml
+echo playbook=$playbook
+if [ ! -f "$playbook" ]
+then
+  echo "-- Not a valid playbook! --"
+  exit 1
+fi
+usage()
+{
+  cat <<EOF
+usage:   `basename $0` [option] [tags]
+options: -l        list tasks
+         -c        check
+         -h        list hosts
+         -v        verbose
+EOF
+}
+while [ "$1" != "" ]
+do
+  case "$1" in
+    "--help") usage ; exit;;
+    "-l") actions="$actions --list-tasks";;
+    "-c") actions="$actions --check";;
+    "-h") actions="$actions --list-hosts";;
+    "-v") actions="$actions --verbose";;
+       *) tags="--tags $1";;
+  esac
+  shift
+done
+echo ansible-playbook $playbook $actions $limit $tags
+ansible-playbook $playbook $actions $limit $tags

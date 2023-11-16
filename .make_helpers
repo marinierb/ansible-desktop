@@ -1,0 +1,39 @@
+#/usr/bin/env bash
+
+# First, create the "an" wrapp helpers
+
+echo "Remove old an helpers..."
+rm an-*
+for pb in `ls playbook-*`
+do
+  name=`echo $pb | cut -d'-' -f2- | cut -d'.' -f1`
+  link=an-$name
+  ln -s an an-$name
+  chmod u+x an-$name
+done
+ls -l an-*
+
+# Next, create the bash completions file
+
+file=.bash_completions
+echo "#/usr/bin/env bash" > $file
+
+for pb in `ls playbook-*`
+do
+  name=`echo $pb | cut -d'-' -f2- | cut -d'.' -f1`
+  echo "Make competions for $name..."
+  cat >> $file <<EOF
+#################################################################################
+_${name}_completions()
+{
+  if [ "\${#COMP_WORDS[@]}" != "2" ]; then
+    return
+  fi
+  COMPREPLY=(\$(compgen -W "\$(grep -v '^ *#' playbook-${name}.yml | grep tags: | awk '{ print \$6 }')" -- "\${COMP_WORDS[1]}"))
+}
+complete -F _${name}_completions an-${name}
+EOF
+done
+echo "###############################################################################" >>$file
+echo -e "\nDone!"
+echo "Don't forget to run completion !"

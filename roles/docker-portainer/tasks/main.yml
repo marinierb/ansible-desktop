@@ -1,0 +1,16 @@
+---
+- name: create portainer docker volume
+  ansible.builtin.docker_volume:
+    name: portainer_data
+
+- name: create portainer docker container
+  community.docker.docker_container:
+    name:  portainer
+    image: portainer/portainer-ce:latest
+    restart_policy: unless-stopped
+    ports:
+    - "8000:8000"
+    - "9443:9443"
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - portainer_data:/data

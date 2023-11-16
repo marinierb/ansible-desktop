@@ -1,0 +1,3 @@
+---
+mediaOtherShare:  #see host_vars
+mediaOtherOpts:  "(fsid=2,ro,all_squash,insecure,no_subtree_check,anongid=1000)"

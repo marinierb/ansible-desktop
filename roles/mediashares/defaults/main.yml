@@ -1,0 +1,3 @@
+---
+mediaShares: #see host_vars
+mediaOpts: "(ro,all_squash,insecure,no_subtree_check)"
