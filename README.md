@@ -126,4 +126,16 @@ Example:
         mv backups/libreoffice.zip.skiprestore backups/libreoffice.zip
         an-nuc libreoffice
 
+## Tooling
+
+### .make_helpers
+
+* Creates a helper for each existing playbook
+* Also creates the bash completion script for each helper
+
+### checkRolesUsed
+
+* Lists each role and the playbooks that use it
+* Identifies unused roles
+
 ### EOF
