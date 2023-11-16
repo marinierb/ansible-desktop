@@ -21,6 +21,7 @@
   - { role: scanner,          tags: scanner }
   - { role: gnome,            tags: gnome }
   - { role: nfs,              tags: nfs }
+  - { role: git,              tags: git }
   # - { role: docker,           tags: docker }
   # - { role: docker-portainer, tags: portainer }
   # - { role: mediashares,      tags: mediashares }

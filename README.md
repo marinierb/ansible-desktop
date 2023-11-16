@@ -2,7 +2,6 @@
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/marinierb/ansible-desktop)
 
-
 ## TO DO
 - spotify (aur build)
 - For crackling audio
