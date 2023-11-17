@@ -1,5 +1,5 @@
 ---
-- hosts: nuc
+- hosts: desktop
   vars:
     doinstall: false
     dorestore: false
