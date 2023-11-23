@@ -1,4 +1,4 @@
-# Ansible Manjaro Setup
+# Ansible Manjaro Desktop Setup
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/marinierb/ansible-desktop)
 
@@ -31,6 +31,15 @@
 1. Update all packages
 
         sudo pacman -Syyu
+
+1. Set static IP
+
+        sudo nmcli con mod "Wired connection 1" \
+          ipv4.addresses "192.168.0.10/24" \
+          ipv4.gateway "192.168.0.1" \
+          ipv4.dns "192.168.0.2" \
+          ipv4.dns-search "home.arpa" \
+          ipv4.method "manual"
 
 1. Reboot
 
