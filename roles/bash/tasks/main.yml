@@ -1,0 +1,19 @@
+---
+- name: set default shell
+  ansible.builtin.user:
+    name: "{{user}}"
+    shell: "/bin/bash"
+  become: true
+
+- name: install bash-completion
+  ansible.builtin.package:
+    name: bash-completion
+    state: present
+  become: true
+
+- name: add some stuff to .bashrc
+  ansible.builtin.blockinfile:
+    path: "{{userDir}}/.bashrc"
+    block: |
+      . {{userDir}}/Scripts/dotbashrc
+    state: present

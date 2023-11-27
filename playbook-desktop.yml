@@ -9,8 +9,7 @@
   - { role: ssh,              tags: ssh }
   - { role: aur,              tags: aur }
   - { role: packages,         tags: packages }
-  - { role: defaultshell,     tags: defaultshell }
-  - { role: bashrc,           tags: bashrc }
+  - { role: bash,             tags: bash }
   - { role: userdirs,         tags: userdirs }
   - { role: cloudlinks,       tags: cloudlinks }
   - { role: chrome,           tags: chrome }
